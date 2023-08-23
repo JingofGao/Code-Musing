@@ -13,43 +13,39 @@ def generateMatrix(n):
     """
     arr = [[0] * n for _ in range(n)]
 
-    value = 1
-    cur_row = 0
-    cur_col = 0
-
-    # 左闭右开
+    row = 0
+    col = 0
+    num = 1
     for _ in range(n // 2):
-        # 从左往右
-        for j in range(cur_col, n - cur_col - 1):
-            arr[cur_row][j] = value
-            value += 1
-        cur_col = j + 1
+        # →
+        for j in range(col, n - col - 1):
+            arr[row][j] = num
+            num += 1
+        col = n - col - 1
 
-        # 从上到下
-        for i in range(cur_row, n - cur_row - 1):
-            arr[i][cur_col] = value
-            value += 1
-        cur_row = i + 1
+        # ↓
+        for i in range(row, n - row - 1):
+            arr[i][col] = num
+            num += 1
+        row = n - row - 1
 
-        # 从右往左
-        for j in range(cur_col, n - cur_col - 1, -1):
-            arr[cur_row][j] = value
-            value += 1
-        cur_col = j - 1
+        # ←
+        for j in range(col, n - col - 1, -1):
+            arr[row][j] = num
+            num += 1
+        col = n - col - 1
 
-        # 从下往上
-        for i in range(cur_row, n - cur_row - 1, -1):
-            arr[i][cur_col] = value
-            value += 1
-        cur_row = i - 1
+        # ↑
+        for i in range(row, n - row - 1, -1):
+            arr[i][col] = num
+            num += 1
+        row = n - row - 1
 
-        # 改变出发点
-        cur_row += 1
-        cur_col += 1
+        row += 1
+        col += 1
 
-    # 最后判断奇偶
     if n % 2 == 1:
-        arr[cur_row][cur_col] = value
+        arr[row][col] = num
     return arr
 
 
